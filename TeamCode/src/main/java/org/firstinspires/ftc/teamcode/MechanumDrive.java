@@ -73,14 +73,20 @@ public class MechanumDrive extends LinearOpMode {
 
             // close the gripper on Y button if not already at the closed position.
             if (gamepad1.b && gripPosition > MIN_POSITION) gripPosition = gripPosition - .01;
-            while (gamepad1.right_bumper){
+            if (gamepad1.right_bumper){
                 linearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
                 linearSlide.setPower(0.5);
+                sleep(100);
+                linearSlide.setPower(0);
             }
-            while (gamepad1.left_bumper) {
+            if (gamepad1.left_bumper) {
                 linearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
                 linearSlide.setPower(0.5);
+                sleep(100);
+                linearSlide.setPower(0);
+
             }
+            // fixed stuff
             if(gamepad1.dpad_down){
                 linearSlide.setPower(0);
             }
@@ -97,8 +103,8 @@ public class MechanumDrive extends LinearOpMode {
             rightMotorFront.setPower(sideRightMotorFront);
             //forward to backward
             leftMotorFront.setPower(leftMotorFrontPower);
-            leftMotorBack.setPower(-leftMotorBackPower);
-            rightMotorFront.setPower(-rightMotorFrontPower);
+            leftMotorBack.setPower(leftMotorBackPower);
+            rightMotorFront.setPower(rightMotorFrontPower);
             rightMotorBack.setPower(rightMotorBackPower);
             // turnturnturnturnturnturn
             leftMotorFront.setPower(gamepad1.right_stick_x);
