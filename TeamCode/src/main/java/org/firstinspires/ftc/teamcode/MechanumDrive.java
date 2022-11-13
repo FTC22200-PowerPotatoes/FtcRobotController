@@ -35,7 +35,7 @@ public class MechanumDrive extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        linearSlide = hardwareMap.get(DcMotor.class, "linear Slide");
+        linearSlide = hardwareMap.get(DcMotor.class, "linearSlide");
         gripServo = hardwareMap.servo.get("gripServo");
         leftMotorFront = hardwareMap.get(DcMotor.class, "leftMotorFront");
         leftMotorBack = hardwareMap.get(DcMotor.class, "leftMotorBack");
@@ -80,6 +80,9 @@ public class MechanumDrive extends LinearOpMode {
             while (gamepad1.left_bumper) {
                 linearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
                 linearSlide.setPower(0.5);
+            }
+            if(gamepad1.dpad_down){
+                linearSlide.setPower(0);
             }
 
 
