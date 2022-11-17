@@ -52,7 +52,7 @@ import java.util.List;
  * is explained below.
  */
 @TeleOp(name = "Concept: TensorFlow Object Detection Webcam", group = "Concept")
-@Disabled
+
 public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
 
     /*
@@ -62,14 +62,14 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
      * has been downloaded to the Robot Controller's SD FLASH memory, it must to be loaded using loadModelFromFile()
      * Here we assume it's an Asset.    Also see method initTfod() below .
      */
-    private static final String TFOD_MODEL_ASSET = "PowerPlay.tflite";
+    private static final String TFOD_MODEL_ASSET = "bluecone_sleeve.tflite";
     // private static final String TFOD_MODEL_FILE  = "/sdcard/FIRST/tflitemodels/CustomTeamModel.tflite";
 
 
     private static final String[] LABELS = {
-            "1 Bolt",
-            "2 Bulb",
-            "3 Panel"
+            "3 FrenchFries",
+            "2 MashedPotatoe",
+            "1 potatoe"
     };
 
     /*
@@ -85,7 +85,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY =
-            " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+            "AbK0MWT/////AAABmeL1G8PaAEjykbLBB+LTfqsZN6rnROcdBqPCPuH+UWrhmXQbUddPQtOjFwAm59EJ+R6kgi6F3HQZ0Jm7zAlQ/Kum3gDn8Eyd3owfoBBv3fh5onDt07QUlhySqSAzJA/q0sqij/vDeLY8b1WXsR4ygx+xm3BveN0hRgs+n/cpzYrAt5jo4ID+scfiXPI1TMGiz5MmY1oSmQUKf1UATJa9KRIQl4jI25Z/CIpGZ7Py0t5xsLrYKJAOMtRr9GvnJxuZ13ZKAmJdkfgM2PmOrohZZmcA7j4L2jSgcfZNhZ0Ku39uDNbSFfaYSHg+W4N0bi/ma5MVBHziIfVxux1PgZ0fpD7QG9JMHt0tZfNa8RHvVEZA";
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
