@@ -67,9 +67,9 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
 
 
     private static final String[] LABELS = {
-            "1 potatoe",
+            "3 FrenchFries",
             "2 MashedPotatoe",
-            "3 FrenchFries"
+            "1 potatoe"
     };
 
     /*
