@@ -62,14 +62,14 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
      * has been downloaded to the Robot Controller's SD FLASH memory, it must to be loaded using loadModelFromFile()
      * Here we assume it's an Asset.    Also see method initTfod() below .
      */
-    private static final String TFOD_MODEL_ASSET = "blueconesleeve.tflite";
+    private static final String TFOD_MODEL_ASSET = "redcone.tflite";
     // private static final String TFOD_MODEL_FILE  = "/sdcard/FIRST/tflitemodels/CustomTeamModel.tflite";
 
 
     private static final String[] LABELS = {
             "3 FrenchFries",
-            "2 MashPotato",
-            "1 Potato"
+            "2 MashedPotatoe",
+            "1 Potatoe"
     };
 
     /*
