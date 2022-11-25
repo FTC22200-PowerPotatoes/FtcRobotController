@@ -66,6 +66,15 @@ public class MechanumDrive extends LinearOpMode {
             double sideRightMotorFront = Range.clip(rightStick, -1.0, 0.5);
             double sideLeftMotorBack = Range.clip(rightStick, -1.0, 0.5);
             double sideRightMotorBack = Range.clip(rightStick, -1.0, 0.5);
+            double linearStick = Range.clip(-gamepad1.right_trigger, -1.0, 0.7);
+            double upStick = gamepad1.left_trigger;
+            double donStick = gamepad1.right_trigger;
+            linearSlide.setPower(donStick);
+            if (upStick > 0.5){
+                linearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
+                linearSlide.setPower(upStick);
+            }
+
 
 
             // open the gripper on X button if not already at most open position.
@@ -73,20 +82,7 @@ public class MechanumDrive extends LinearOpMode {
 
             // close the gripper on Y button if not already at the closed position.
             if (gamepad1.b && gripPosition > MIN_POSITION) gripPosition = gripPosition - .01;
-            if (gamepad1.right_bumper){
-                linearSlide.setDirection(DcMotorSimple.Direction.FORWARD);
-                linearSlide.setPower(0.5);
-                sleep(100);
-                linearSlide.setPower(0);
-            }
-            if (gamepad1.left_bumper) {
-                linearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
-                linearSlide.setPower(0.5);
-                sleep(100);
-                linearSlide.setPower(0);
-
-            }
-            // fixed stuff
+            linearSlide.setPower(linearStick);
             if(gamepad1.dpad_down){
                 linearSlide.setPower(0);
             }
@@ -97,20 +93,20 @@ public class MechanumDrive extends LinearOpMode {
 
 
             //side to side
-            leftMotorFront.setPower(sideLeftMotorFront);
-            leftMotorBack.setPower(sideLeftMotorBack);
-            rightMotorBack.setPower(sideRightMotorBack);
-            rightMotorFront.setPower(sideRightMotorFront);
-            //forward to backward
-            leftMotorFront.setPower(leftMotorFrontPower);
-            leftMotorBack.setPower(leftMotorBackPower);
-            rightMotorFront.setPower(rightMotorFrontPower);
-            rightMotorBack.setPower(rightMotorBackPower);
-            // turnturnturnturnturnturn
-            leftMotorFront.setPower(gamepad1.right_stick_x);
-            leftMotorBack.setPower(gamepad1.right_stick_x);
+            leftMotorFront.setPower(-gamepad1.right_stick_x);
+            leftMotorBack.setPower(-gamepad1.right_stick_x);
+            rightMotorBack.setPower(gamepad1.right_stick_x);
             rightMotorFront.setPower(-gamepad1.right_stick_x);
-            rightMotorBack.setPower(-gamepad1.right_stick_x);
+            //forward to backward
+            leftMotorFront.setPower(-sideLeftMotorFront);
+            leftMotorBack.setPower(sideLeftMotorBack);
+            rightMotorFront.setPower(sideLeftMotorFront);
+            rightMotorBack.setPower(sideRightMotorBack);
+            // turnturnturnturnturnturn
+            leftMotorFront.setPower(gamepad1.left_stick_y);
+            leftMotorBack.setPower(gamepad1.left_stick_y);
+            rightMotorFront.setPower(gamepad1.left_stick_y);
+            rightMotorBack.setPower(-gamepad1.left_stick_y);
 
 
 
