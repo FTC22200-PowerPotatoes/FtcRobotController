@@ -66,14 +66,12 @@ public class MechanumDrive extends LinearOpMode {
             double sideRightMotorFront = Range.clip(rightStick, -1.0, 0.5);
             double sideLeftMotorBack = Range.clip(rightStick, -1.0, 0.5);
             double sideRightMotorBack = Range.clip(rightStick, -1.0, 0.5);
-            double linearStick = Range.clip(-gamepad1.right_trigger, -1.0, 0.7);
-            double upStick = gamepad1.left_trigger;
-            double donStick = gamepad1.right_trigger;
-            linearSlide.setPower(donStick);
-            if (upStick > 0.5){
-                linearSlide.setDirection(DcMotorSimple.Direction.REVERSE);
-                linearSlide.setPower(upStick);
-            }
+            double linearStick = Range.clip(-gamepad1.right_trigger, 0.0, 0.5);
+
+            linearSlide.setPower(gamepad1.left_trigger);
+            linearSlide.setPower(-gamepad1.right_trigger);
+
+
 
 
 
@@ -82,10 +80,9 @@ public class MechanumDrive extends LinearOpMode {
 
             // close the gripper on Y button if not already at the closed position.
             if (gamepad1.b && gripPosition > MIN_POSITION) gripPosition = gripPosition - .01;
-            linearSlide.setPower(linearStick);
-            if(gamepad1.dpad_down){
-                linearSlide.setPower(0);
-            }
+            linearSlide.setPower(-gamepad1.right_trigger);
+            linearSlide.setPower(gamepad1.left_trigger);
+
 
 
 
@@ -93,25 +90,43 @@ public class MechanumDrive extends LinearOpMode {
 
 
             //side to side
-            leftMotorFront.setPower(-gamepad1.right_stick_x);
+            leftMotorFront.setPower(gamepad1.right_stick_x);
             leftMotorBack.setPower(-gamepad1.right_stick_x);
             rightMotorBack.setPower(gamepad1.right_stick_x);
-            rightMotorFront.setPower(-gamepad1.right_stick_x);
-            //forward to backward
-            leftMotorFront.setPower(-sideLeftMotorFront);
-            leftMotorBack.setPower(sideLeftMotorBack);
-            rightMotorFront.setPower(sideLeftMotorFront);
-            rightMotorBack.setPower(sideRightMotorBack);
-            // turnturnturnturnturnturn
-            leftMotorFront.setPower(gamepad1.left_stick_y);
-            leftMotorBack.setPower(gamepad1.left_stick_y);
-            rightMotorFront.setPower(gamepad1.left_stick_y);
-            rightMotorBack.setPower(-gamepad1.left_stick_y);
+            rightMotorFront.setPower(gamepad1.right_stick_x);
+            //turning
+            leftMotorFront.setPower(gamepad1.right_stick_y);
+            leftMotorBack.setPower(gamepad1.right_stick_y);
+            rightMotorFront.setPower(-gamepad1.right_stick_y);
+            rightMotorBack.setPower(gamepad1.right_stick_y);
+            // Forwards and Backward
+
+
+
+
 
 
 
 
 
         }
+
+    }
+    public void move(float stick){
+        stick = gamepad1.left_stick_y;
+        if (stick > 0.0){
+            leftMotorFront.setPower(gamepad1.left_stick_y*gamepad1.left_stick_y);
+            leftMotorBack.setPower(gamepad1.left_stick_y*gamepad1.left_stick_y);
+            rightMotorFront.setPower(gamepad1.left_stick_y*gamepad1.left_stick_y);
+            rightMotorBack.setPower(-gamepad1.left_stick_y*gamepad1.left_stick_y);
+
+        }
+        else if (stick < 0.0){
+            leftMotorFront.setPower((gamepad1.left_stick_y*gamepad1.left_stick_y)*-1.0);
+            leftMotorBack.setPower((gamepad1.left_stick_y*gamepad1.left_stick_y)*-1.0);
+            rightMotorFront.setPower((gamepad1.left_stick_y*gamepad1.left_stick_y)*-1.0);
+            rightMotorBack.setPower((-gamepad1.left_stick_y*gamepad1.left_stick_y)*-1.0);
+        }
+
     }
 }
