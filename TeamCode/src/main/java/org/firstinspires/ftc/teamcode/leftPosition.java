@@ -149,7 +149,7 @@ public class leftPosition extends LinearOpMode {
             strafeLeft(0.5, 1046);
             //d
         } else if (tagOfInterest.id == Middle) {
-            //27 inch forward. 45.5 ticks per inch.
+            //27 inch forward. 45.5 ticks per inch
             moveDistance(0.5, 1225);
 
         } else if (tagOfInterest.id == Right) {
