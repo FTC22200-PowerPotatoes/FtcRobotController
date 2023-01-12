@@ -29,100 +29,23 @@ public class AutoDrive extends LinearOpMode  {
         leftMotorBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotorBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         waitForStart();
+
         while (opModeIsActive()) {
             // 142 ticks per inch
-            //scenario 1
-            moveDistance(0.5, 1704);
-            strafeLeft(0.7, 420);
-            score(0.2, 538);
+            moveDistance(1, 1170);
+            break;
 
 
-            moveDistance(0.5, 1500);
-            leftMotorBack.setPower(0);
-            leftMotorFront.setPower(0);
-            rightMotorFront.setPower(0);
-            rightMotorBack.setPower(0);
 
+
+            //score
+            // Strafe to the left 710
 
         }
 
 
     }
-    public void score(double power, int distance){
-        linearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        linearSlide.setTargetPosition(distance);
-
-        linearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        linearSlide.setPower(power);
-
-        while(linearSlide.isBusy()){
-
-        }
-        linearSlide.setPower(0);
-        linearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-    public void turn(double power, int degrees, String rightOrLeft) {
-
-
-
-
-        leftMotorFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftMotorBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotorFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotorBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        double sqrtE = Math.sqrt(2);
-        double pi = Math.PI;
-        leftMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        double inchesToDegrees = 142.25 * degrees * (17 * Math.sqrt(2) * Math.PI) / 360;
-        int integerDegrees = Math.round((int)inchesToDegrees);
-
-        leftMotorFront.setTargetPosition(integerDegrees);
-        leftMotorBack.setTargetPosition(integerDegrees);
-        rightMotorFront.setTargetPosition(integerDegrees);
-        rightMotorBack.setTargetPosition(integerDegrees);
-
-        leftMotorFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotorBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotorFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotorBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        leftMotorFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftMotorBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotorBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotorFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        if(rightOrLeft.equals("right")) {
-            rightMotorFront.setPower(-power);
-            rightMotorBack.setPower(-power);
-            leftMotorFront.setPower(power);
-            leftMotorBack.setPower(power);
-
-        }
-        else if (rightOrLeft.equals("left")) {
-            rightMotorFront.setPower(power);
-            rightMotorBack.setPower(power);
-            leftMotorFront.setPower(-power);
-            leftMotorBack.setPower(-power);
-
-
-        }        // working d
-        while(leftMotorFront.isBusy() && leftMotorBack.isBusy() && rightMotorFront.isBusy() && rightMotorBack.isBusy()){
-
-        }
-        leftMotorBack.setPower(0);
-        leftMotorFront.setPower(0);
-        rightMotorBack.setPower(0);
-        rightMotorFront.setPower(0);
-        leftMotorBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMotorBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-    }
 
     public void moveDistance(double power, int distance) {
 
@@ -132,9 +55,9 @@ public class AutoDrive extends LinearOpMode  {
         rightMotorBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
-        leftMotorFront.setDirection(DcMotorSimple.Direction.FORWARD);
-        leftMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightMotorFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftMotorBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
         leftMotorFront.setTargetPosition(distance);
         leftMotorBack.setTargetPosition(distance);
@@ -146,10 +69,10 @@ public class AutoDrive extends LinearOpMode  {
         rightMotorFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightMotorBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        leftMotorFront.setPower(power);
-        leftMotorBack.setPower(power);
+        leftMotorFront.setPower(-power);
+        leftMotorBack.setPower(-power);
         rightMotorBack.setPower(power);
-        rightMotorFront.setPower(power);
+        rightMotorFront.setPower(-power);
 
         while(leftMotorFront.isBusy() && leftMotorBack.isBusy() && rightMotorFront.isBusy() && rightMotorBack.isBusy()){
 
@@ -171,8 +94,8 @@ public class AutoDrive extends LinearOpMode  {
         rightMotorFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightMotorBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        leftMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightMotorFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftMotorFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightMotorBack.setDirection(DcMotorSimple.Direction.REVERSE);
         leftMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
 
@@ -187,10 +110,10 @@ public class AutoDrive extends LinearOpMode  {
         rightMotorFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightMotorBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        leftMotorFront.setPower(power);
-        leftMotorBack.setPower(power);
+        leftMotorFront.setPower(-power);
+        leftMotorBack.setPower(-power);
         rightMotorBack.setPower(power);
-        rightMotorFront.setPower(power);
+        rightMotorFront.setPower(-power);
 
         while(leftMotorFront.isBusy() && leftMotorBack.isBusy() && rightMotorFront.isBusy() && rightMotorBack.isBusy()){
 

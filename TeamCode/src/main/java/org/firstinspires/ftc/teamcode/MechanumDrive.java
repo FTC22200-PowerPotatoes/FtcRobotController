@@ -22,6 +22,7 @@ public class MechanumDrive extends LinearOpMode {
     private DcMotor leftMotorBack = null;
     private DcMotor rightMotorFront = null;
     private DcMotor rightMotorBack = null;
+
     CRServo contServo;
     float   leftY, rightY;
     Servo gripServo;
@@ -47,41 +48,38 @@ public class MechanumDrive extends LinearOpMode {
         rightMotorFront.setDirection(DcMotorSimple.Direction.FORWARD);
         rightMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        double leftMotorFrontPower = 0.0;
-        double leftMotorBackPower = 0.0;
-        double rightMotorFrontPower = 0.0;
-        double rightMotorBackPower = 0.0;
+
 
         waitForStart();
 
         while(opModeIsActive()){
-            double leftStick = -gamepad1.left_stick_y;
-            double rightStick = -gamepad1.right_stick_y * 1.1;
+            if (gamepad2.left_trigger > 0.0){
+                linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                linearSlide.setPower(gamepad2.left_trigger);
+            }
+            if (gamepad2.right_trigger > 0.0){
+                linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                linearSlide.setPower(-gamepad2.right_trigger);
+            }
+            linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            double rightStick = Range.clip(-gamepad1.right_stick_y, -1.0, 0.6) * 1.1;
+            double leftStick = Range.clip(-gamepad1.left_stick_y, -1.0, 1.0);
 
-            leftMotorFrontPower = Range.clip(leftStick, -1.0, 0.6);
-            leftMotorBackPower = Range.clip(leftStick, -1.0, 0.6);
-            rightMotorFrontPower = Range.clip(leftStick, -1.0, 0.6);
-            rightMotorBackPower = Range.clip(leftStick, -1.0, 0.6);
-            double sideLeftMotorFront = Range.clip(rightStick, -1.0, 0.5);
-            double sideRightMotorFront = Range.clip(rightStick, -1.0, 0.5);
-            double sideLeftMotorBack = Range.clip(rightStick, -1.0, 0.5);
-            double sideRightMotorBack = Range.clip(rightStick, -1.0, 0.5);
             double linearStick = Range.clip(-gamepad1.right_trigger, 0.0, 0.5);
 
-            linearSlide.setPower(gamepad1.left_trigger);
-            linearSlide.setPower(-gamepad1.right_trigger);
+            linearSlide.setPower(gamepad2.left_trigger);
+            linearSlide.setPower(-gamepad2.right_trigger);
 
 
 
 
 
             // open the gripper on X button if not already at most open position.
-            if (gamepad1.a && gripPosition < MAX_POSITION) gripPosition = gripPosition + .01;
+            if (gamepad2.a && gripPosition < MAX_POSITION) gripPosition = gripPosition + .01;
 
             // close the gripper on Y button if not already at the closed position.
-            if (gamepad1.b && gripPosition > MIN_POSITION) gripPosition = gripPosition - .01;
-            linearSlide.setPower(-gamepad1.right_trigger);
-            linearSlide.setPower(gamepad1.left_trigger);
+            if (gamepad2.b && gripPosition > MIN_POSITION) gripPosition = gripPosition - .01;
+
 
 
 
@@ -90,16 +88,20 @@ public class MechanumDrive extends LinearOpMode {
 
 
             //side to side
-            leftMotorFront.setPower(gamepad1.right_stick_x);
-            leftMotorBack.setPower(-gamepad1.right_stick_x);
-            rightMotorBack.setPower(gamepad1.right_stick_x);
-            rightMotorFront.setPower(gamepad1.right_stick_x);
+            leftMotorFront.setPower(-gamepad1.right_stick_x);
+            leftMotorBack.setPower(gamepad1.right_stick_x);
+            rightMotorBack.setPower(-gamepad1.right_stick_x);
+            rightMotorFront.setPower(-gamepad1.right_stick_x);
             //turning
-            leftMotorFront.setPower(gamepad1.right_stick_y);
-            leftMotorBack.setPower(gamepad1.right_stick_y);
-            rightMotorFront.setPower(-gamepad1.right_stick_y);
-            rightMotorBack.setPower(gamepad1.right_stick_y);
+            leftMotorFront.setPower(-leftStick);
+            leftMotorBack.setPower(-leftStick);
+            rightMotorFront.setPower(-leftStick);
+            rightMotorBack.setPower(leftStick);
             // Forwards and Backward
+            leftMotorFront.setPower(-rightStick);
+            leftMotorBack.setPower(rightStick);
+            rightMotorFront.setPower(rightStick);
+            rightMotorBack.setPower(rightStick);
 
 
 
@@ -109,23 +111,6 @@ public class MechanumDrive extends LinearOpMode {
 
 
 
-        }
-
-    }
-    public void move(float stick){
-        stick = gamepad1.left_stick_y;
-        if (stick > 0.0){
-            leftMotorFront.setPower(gamepad1.left_stick_y*gamepad1.left_stick_y);
-            leftMotorBack.setPower(gamepad1.left_stick_y*gamepad1.left_stick_y);
-            rightMotorFront.setPower(gamepad1.left_stick_y*gamepad1.left_stick_y);
-            rightMotorBack.setPower(-gamepad1.left_stick_y*gamepad1.left_stick_y);
-
-        }
-        else if (stick < 0.0){
-            leftMotorFront.setPower((gamepad1.left_stick_y*gamepad1.left_stick_y)*-1.0);
-            leftMotorBack.setPower((gamepad1.left_stick_y*gamepad1.left_stick_y)*-1.0);
-            rightMotorFront.setPower((gamepad1.left_stick_y*gamepad1.left_stick_y)*-1.0);
-            rightMotorBack.setPower((-gamepad1.left_stick_y*gamepad1.left_stick_y)*-1.0);
         }
 
     }
