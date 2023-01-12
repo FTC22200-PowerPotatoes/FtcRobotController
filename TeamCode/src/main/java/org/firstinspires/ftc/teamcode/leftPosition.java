@@ -145,15 +145,16 @@ public class leftPosition extends LinearOpMode {
 
         /* What happens after apriltag is detected */
         if (tagOfInterest == null || tagOfInterest.id == Left) {
-            moveDistance(0.5, 1200);
-            strafeLeft(0.5, 1460);
+            moveDistance(0.5, 1225);
+            strafeLeft(0.5, 1046);
             //d
         } else if (tagOfInterest.id == Middle) {
-            moveDistance(0.5, 1200);
+            //27 inch forward. 45.5 ticks per inch.
+            moveDistance(0.5, 1225);
 
         } else if (tagOfInterest.id == Right) {
-            moveDistance(0.5, 1100);
-            strafeRight(0.5, 1550);
+            moveDistance(0.5, 1225);
+            strafeRight(0.5, 1046);
         }
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
