@@ -147,6 +147,7 @@ public class leftPosition extends LinearOpMode {
         if (tagOfInterest == null || tagOfInterest.id == Left) {
             moveDistance(0.5, 1200);
             strafeLeft(0.5, 1460);
+            //d
         } else if (tagOfInterest.id == Middle) {
             moveDistance(0.5, 1200);
 
