@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -9,15 +8,13 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-import fi.iki.elonen.NanoHTTPD;
-
 /**
  * hola
 **/
 
-@TeleOp(name="MechanumDrive", group="Linear Opmode")
+@TeleOp(name="OneControllerDrive", group="Linear Opmode")
 
-public class MechanumDrive extends LinearOpMode {
+public class OneControllerDrive extends LinearOpMode {
 
     // Declare Motors
     private DcMotor linearSlide = null;
@@ -58,10 +55,10 @@ public class MechanumDrive extends LinearOpMode {
         while(opModeIsActive()){
 
         if (gamepad2.left_trigger > 0.0) {
-            linearSlide.setPower(-gamepad2.left_trigger);
+            linearSlide.setPower(-gamepad1.left_trigger);
         }
         if (gamepad2.right_trigger > 0.0) {
-            linearSlide.setPower(gamepad2.right_trigger);
+            linearSlide.setPower(gamepad1.right_trigger);
         }
         linearSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -69,10 +66,10 @@ public class MechanumDrive extends LinearOpMode {
 
 
             // open the gripper on X button if not already at most open position.
-            if (gamepad2.a) {
+            if (gamepad1.a) {
                 gripServo.setPosition(0.70);
             }
-            else if (gamepad2.b) {
+            else if (gamepad1.b) {
                 gripServo.setPosition(0.01);
             }
             double y = Range.clip(-gamepad1.left_stick_x, -0.5, 0.5); // Remember, this is reversed!

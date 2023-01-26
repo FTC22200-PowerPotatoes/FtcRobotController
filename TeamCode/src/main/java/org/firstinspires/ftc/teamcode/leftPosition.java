@@ -145,16 +145,16 @@ public class leftPosition extends LinearOpMode {
 
         /* What happens after apriltag is detected */
         if (tagOfInterest == null || tagOfInterest.id == Left) {
-            moveDistance(0.5, 1225);
-            strafeLeft(0.5, 1046);
+            moveDistance(0.45, 1150);
+            strafeLeft(0.3, 1300);
             //d
         } else if (tagOfInterest.id == Middle) {
             //27 inch forward. 45.5 ticks per inch
-            moveDistance(0.5, 1225);
+            moveDistance(0.3, 1205);
 
         } else if (tagOfInterest.id == Right) {
-            moveDistance(0.5, 1225);
-            strafeRight(0.5, 1046);
+            moveDistance(0.3, 1150);
+            strafeRight(0.3, 1250);
         }
 
         /* You wouldn't have this in your autonomous, this is just to prevent the sample from ending */
@@ -182,7 +182,7 @@ public class leftPosition extends LinearOpMode {
 
 
         leftMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftMotorBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
         rightMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
         leftMotorFront.setTargetPosition(distance);
@@ -196,17 +196,19 @@ public class leftPosition extends LinearOpMode {
         rightMotorBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         leftMotorFront.setPower(-power);
-        leftMotorBack.setPower(-power);
+        leftMotorBack.setPower(-1.0);
         rightMotorBack.setPower(power);
         rightMotorFront.setPower(-power);
 
         while (leftMotorFront.isBusy() && leftMotorBack.isBusy() && rightMotorFront.isBusy() && rightMotorBack.isBusy()) {
 
         }
+        rightMotorFront.setPower(0);
         leftMotorBack.setPower(0);
         leftMotorFront.setPower(0);
         rightMotorBack.setPower(0);
-        rightMotorFront.setPower(0);
+
+
         leftMotorBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -224,7 +226,7 @@ public class leftPosition extends LinearOpMode {
         leftMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightMotorFront.setDirection(DcMotorSimple.Direction.FORWARD);
         rightMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
-        leftMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftMotorBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         leftMotorFront.setTargetPosition(distance);
@@ -238,7 +240,7 @@ public class leftPosition extends LinearOpMode {
         rightMotorBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         leftMotorFront.setPower(-power);
-        leftMotorBack.setPower(-power);
+        leftMotorBack.setPower(-1.0);
         rightMotorBack.setPower(power);
         rightMotorFront.setPower(-power);
 
@@ -249,6 +251,7 @@ public class leftPosition extends LinearOpMode {
         leftMotorFront.setPower(0);
         rightMotorBack.setPower(0);
         rightMotorFront.setPower(0);
+
         leftMotorBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -264,7 +267,7 @@ public class leftPosition extends LinearOpMode {
         leftMotorFront.setDirection(DcMotorSimple.Direction.FORWARD);
         rightMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightMotorBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftMotorBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftMotorBack.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         leftMotorFront.setTargetPosition(distance);
@@ -278,7 +281,7 @@ public class leftPosition extends LinearOpMode {
         rightMotorBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         leftMotorFront.setPower(-power);
-        leftMotorBack.setPower(-power);
+        leftMotorBack.setPower(-1.0);
         rightMotorBack.setPower(power);
         rightMotorFront.setPower(-power);
 
